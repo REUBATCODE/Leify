@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Album;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +45,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Songs routes
+Route::prefix('/songs')->group(function () {
+    Route::get('/', [SongController::class, 'index'])->name('songs.list');
+    Route::get('/view/{id}', [SongController::class, 'view'])->name('songs.view');
+});
+
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register.create');
 
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
+
+
 
 
 require __DIR__.'/auth.php';

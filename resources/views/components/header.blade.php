@@ -44,7 +44,7 @@
           <div class="menu space-x-4 flex items-center">
             <a href="#" class="text-white hover:text-gray-200">DESTACADO</a>
             <span class="text-gray-500">|</span>
-            <a href="#" class="text-white hover:text-gray-200">CANCIONES</a>
+            <a href="{{route('songs.list')}}" class="text-white hover:text-gray-200">CANCIONES</a>
             <span class="text-gray-500">|</span>
             <a href="{{route('albums.list')}}" class="text-white hover:text-gray-200">ALBUMES</a>
             <span class="text-gray-500">|</span>
