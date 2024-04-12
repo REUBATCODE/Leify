@@ -27,14 +27,7 @@
                         <div>
                             <div class="flex items-center justify-between mb-3">
 
-                                <h1 class="text-5xl font-bold">{{$user->name}}</h1>
-                                <a href="{{route ('profile.edit',$user)}}" class="ml-80 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-
                                 <h1 class="text-5xl font-bold">{{$artist->name}}</h1>
-                                <a href="{{route ('artists.update',$artist->id)}}" class="ml-80 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-
-                                    Actualizar
-                                </a>
                             </div>                            
                             <p class="text-left text-2xl">
                                 El Mejor 
