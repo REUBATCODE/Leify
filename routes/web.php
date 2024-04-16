@@ -1,19 +1,19 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Album;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SongController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
+// Landing page
 Route::get('/', function () {
     return view('landing');
 })->name('landing');
@@ -28,21 +28,31 @@ Route::prefix('/albums')->group(function () {
 
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Artists routes
+Route::prefix('/artists')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('artists.list');
+    Route::get('/view/{id}', [ProfileController::class, 'view'])->name('artists.view');
+    Route::get('/update/{id}', [ProfileController::class, 'updateArtist'])->name('artists.update');
+    Route::get('/delete/{id}', [ProfileController::class, 'deleteArtist'])->name('artists.delete');
+    Route::get('/create', [ProfileController::class, 'createArtist'])->name('artists.create');
+    Route::post('/create', [ProfileController::class, 'storeArtist'])->name('artists.store');
+});
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+// Authenticated routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Songs routes
+// Songs routes en el issue63-us
 Route::prefix('/songs')->group(function () {
     Route::get('/', [SongController::class, 'index'])->name('songs.list');
     Route::get('/view/{id}', [SongController::class, 'view'])->name('songs.view');
-    Route::delete('/delete/{id}', [SongController::class, 'delete'])->name('songs.delete');
 });
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register.create');
