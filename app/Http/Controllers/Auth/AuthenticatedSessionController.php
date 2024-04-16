@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\User; // Add this import statement
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,19 +18,30 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        // Ya que solo muestras la vista de login, probablemente no necesites enviar 'roles' y 'songs' aquí.
         return view('auth.login');
     }
 
     /**
      * Handle an incoming authentication request.
+     *
+     * Ajusta la lógica de redirección después de la autenticación basada en el rol del usuario.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
+        $user = Auth::user();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Obtiene el usuario autenticado
+        if ($user->roles->contains('SUPERADMINISTRADOR') || $user->roles->contains('ADMINISTRADOR')) {
+            // Redirige a la ruta del dashboard
+            return redirect(RouteServiceProvider::HOME);
+        }
+        
+        // Para cualquier otro usuario, redirige a la página de landing
+        return redirect(route('landing'));
     }
 
     /**

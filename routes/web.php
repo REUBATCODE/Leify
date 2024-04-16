@@ -28,8 +28,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-<<<<<<< Updated upstream
-=======
 // Songs routes
 Route::prefix('/songs')->group(function () {
     Route::get('/', [SongController::class, 'index'])->name('songs.list');
@@ -44,5 +42,4 @@ Route::post('/register', [RegisteredUserController::class, 'store'])->name('regi
 
 
 
->>>>>>> Stashed changes
 require __DIR__.'/auth.php';

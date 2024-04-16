@@ -18,7 +18,7 @@
         @component('components.header')
         @endcomponent          
             <div class="container mx-auto px-4">
-                <form method="POST" action="{{ route('register') }}" class="mt-8 max-w-md mx-auto">
+                <form method="POST" action="{{ route('artists.store') }}" class="mt-8 max-w-md mx-auto">
                     @csrf
                     <div class="space-y-4">
                         <h1 class="text-center text-4xl">Registrarse</h1>
@@ -50,8 +50,8 @@
                         <!-- Confirm Password -->
                         <div>
                             <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                            <input id="password_confirmation" type="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                            <p class="mt-2 text-sm text-red-600"></p>
+                            <input id="password_confirmation" name="password_confirmation" type="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            <p class="mt-2 text-sm text-red-600">{{ $errors->first('password_confirmation') }}</p>
                         </div>
                         <div>
                             <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
