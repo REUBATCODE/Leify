@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landing');
+})->name('landing');
+
+Route::get('/artists', [ArtistController::class, 'index'])->name('artists.list');
+
+
+
+Route::prefix('/albums')->group(function () {
+    Route::get('/', [AlbumController::class, 'index'])->name('albums.list');
+    Route::get('/view/{id}', [AlbumController::class, 'view'])->name('albums.view');
+
 });
 
 Route::get('/dashboard', function () {
