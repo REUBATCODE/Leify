@@ -16,7 +16,9 @@
     </head>
     <body class="font-sans bg-yellow-50 text-gray-800">
         @component('components.header')
-        @endcomponent          
+        @endcomponent
+        <div class="flex flex-col min-h-screen">
+            <div class="flex-grow">      
           <main>
             <section class="container mx-auto px-4">
               <h1 class="text-3xl font-bold text-center mt-12 mb-4">Canciones</h1>
@@ -48,6 +50,8 @@
             </div>
             </section>
           </main>
+        </div>
+    </div>
         @component('components.footer')
         @endcomponent
     </body>

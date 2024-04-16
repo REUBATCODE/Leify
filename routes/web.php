@@ -53,6 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::prefix('/songs')->group(function () {
     Route::get('/', [SongController::class, 'index'])->name('songs.list');
     Route::get('/view/{id}', [SongController::class, 'view'])->name('songs.view');
+    Route::get('/songs', 'SongController@index');
 });
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register.create');
